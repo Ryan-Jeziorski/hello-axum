@@ -50,6 +50,10 @@
             cargo-watch
             rust-analyzer
 
+            # Other Tools
+            lsd
+            tree
+
           ];
         };
       });
