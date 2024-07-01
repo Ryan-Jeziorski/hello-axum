@@ -7,8 +7,10 @@ use tower_http::services::ServeDir;
 
 #[tokio::main]
 async fn main() {
-    // Set static html directory to server from
     // build our application with a route
+    // Set app to server static html website.
+    // TODO: Note that I'm probably doing this the wrong way at the moment
+    //       but I'm still getting used to Rust and Axum
     let app = Router::new()
         .route_service("/", ServeDir::new("static/homepage"))
         .nest_service("/hompage", ServeDir::new("static/homepage"))
