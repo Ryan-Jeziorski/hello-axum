@@ -13,7 +13,7 @@ async fn main() {
     //       but I'm still getting used to Rust and Axum
     let app = Router::new()
         .route_service("/", ServeDir::new("static/homepage"))
-        .nest_service("/hompage", ServeDir::new("static/homepage"))
+        .nest_service("/homepage", ServeDir::new("static/homepage"))
         .nest_service("/index.html", ServeDir::new("static/homepage"))
         .nest_service("/page_1", ServeDir::new("static/page_1"))
         .nest_service("/page_1/index.html", ServeDir::new("static/page_1"));
