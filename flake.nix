@@ -28,8 +28,7 @@
               rust.fromRustupToolchainFile ./rust-toolchain
             else
               rust.stable.latest.default.override {
-                extensions = [ "rust-src" "rustfmt" "llvm-tools-preview" ];
-                targets = [ "thumbv6m-none-eabi" ];
+                extensions = [ "rust-src" "rustfmt" ];
               };
         })
       ];
