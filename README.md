@@ -15,3 +15,6 @@ Nothing much, this is a project I create to explore a creating a simple website
 with Rust, Axum, Templates, and HTMX. It's a bit of a playground with no real
 end goal. I might turn it into a blog to document my developer experince in
 my free time. But I'm not really sure.
+
+## 2024-07-25
+- Toyed around with trying to use htmx
