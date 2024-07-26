@@ -8,6 +8,13 @@
     <!-- Minified version of simple.css -->
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 
+    <!-- htmx library -->
+    <script 
+      src="https://unpkg.com/htmx.org@2.0.1" 
+      integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" 
+      crossorigin="anonymous">
+    </script>
+
     <title>Homepage</title>
   </head>
   <body>
@@ -17,12 +24,20 @@
     <p>Welcome to this starter webpage! Adding more information 
     </p>
 
-    <h2>Site Map</h2>
-    <ul>
-      <li><a href="./index.html">Home</a></li>
-      <li><a href="../page_1/index.html">Test</a></li>
-    </ul>
-
+    <!-- 
+      This will load the footer into the page on load 
+      This feels like an inelegant solution and I should
+      probably work harder on learning Axum so that I can
+      use a templating engine for something like this.
+      But it was a good exercise to know that it can be
+      done.
+    -->
+    <div 
+      hx-get="/footer"
+      hx-trigger="load"
+      hx-target="this"
+      hx-swap="outerHTML"
+    ></div>
 
   </body>
 </html>
