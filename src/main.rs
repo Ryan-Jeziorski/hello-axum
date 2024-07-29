@@ -23,7 +23,7 @@ use tokio::net::TcpListener;
 #[tokio::main]
 async fn main() {
     // Create a new Tera instance and add a template from a string
-    let mut tera = Tera::new("site/**/*").unwrap();
+    let mut tera = Tera::new("site/*").unwrap();
     tera.add_raw_template("hello", "Hello, {{ name }}!").unwrap();
 
     // build our application with a route
@@ -32,8 +32,8 @@ async fn main() {
     //       but I'm still getting used to Rust and Axum
     let app = Router::new()
         .route("/", get(wip_page))
-        .route("/footer", get(footer))
-        .route("/tera_test/:name", get(get_name))
+        .route("/:name", get(get_name))
+        // .route("/base", get(get_name))
         .with_state(AppState {
             engine: Engine::from(tera),
         });
@@ -90,12 +90,12 @@ async fn get_name(
     // Obtain the engine
     engine: AppEngine,
     // Extract the key
-    CustomKey(key): CustomKey,
+    CustomKey(template): CustomKey,
     Path(name): Path<String>,
 ) -> impl IntoResponse {
     let person = Person { name };
 
-    RenderHtml(key, engine, person)
+    RenderHtml(template, engine, person)
 }
 
 async fn wip_page() -> Html<&'static str> {
