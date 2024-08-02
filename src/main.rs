@@ -19,25 +19,27 @@ use tera::Tera;
 use tokio::net::TcpListener;
 
 
+// Type alias for our engine using Tera templates
+type AppEngine = Engine<Tera>;
+
+
+#[derive(Clone, FromRef)]
+struct AppState {
+    engine: AppEngine,
+}
 
 #[tokio::main]
 async fn main() {
     // Create a new Tera instance and add a template from a string
-    let mut tera = Tera::new("site/*").unwrap();
-    tera.add_raw_template("hello", "Hello, {{ name }}!").unwrap();
+    let tera = Tera::new("site/*").unwrap();
 
-    // build our application with a route
-    // Set app to server static html website.
-    // TODO: Note that I'm probably doing this the wrong way at the moment
-    //       but I'm still getting used to Rust and Axum
+    // Build the router with app state from axum templates
     let app = Router::new()
         .route("/", get(wip_page))
         .route("/:name", get(get_name))
-        // .route("/base", get(get_name))
         .with_state(AppState {
             engine: Engine::from(tera),
         });
-        // .route("/tera_test", get(render_tera_test));
 
     // run it
     let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
@@ -48,8 +50,6 @@ async fn main() {
 }
 
 
-// Type alias for our engine. For this example, we are using Tera
-type AppEngine = Engine<Tera>;
 
 // Because Tera::new loads an entire folder, we need to remove the `/` prefix
 // and add a `.html` suffix. We can implement our own custom key extractor that
@@ -114,33 +114,4 @@ async fn wip_page() -> Html<&'static str> {
     </body> 
 </html> 
     "#)
-}
-
-async fn footer() -> Html<&'static str> {
-    Html(r#"
-<footer>
-<h1 style="font-size: small;">Site Map</h1>
-    <a href="./index.html">Home</a>
-    <a href="../page_1/index.html">Test</a>
-</footer>
-    "#)
-}
-
-// async fn render_tera_test(Path(name): Path<String>, tera:<Tera>) -> Html<String> {
-
-//     // Prepare the context with some data
-//     let mut context = tera::Context::new();
-//     context.insert("name", "World");
-
-//     // Render the template with the given context
-//     let r = tera.render("hello", &context).unwrap();
-//     //assert_eq!(rendered, "Hello, World!");
-
-//     let html = Html(r);
-//     html
-// }
-
-#[derive(Clone, FromRef)]
-struct AppState {
-    engine: AppEngine,
 }
