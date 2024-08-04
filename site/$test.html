@@ -15,19 +15,11 @@
       crossorigin="anonymous">
     </script>
 
-    {% block head %}
     <link rel="stylesheet" href="style.css" />
-    <title>{% block title %}{% endblock title %}</title>
-    {% endblock head %}
+    <title>Test</title>
 </head>
 <body>
-    <div id="content">{% block content %}{% endblock content %}</div>
-    <footer>
-        {% block footer %}
-        <h1 style="font-size: small;">Site Map</h1>
-            <a href="./index.html">Home</a>
-            <a href="../page_1/index.html">Test</a>
-        {% endblock footer %}
-    </footer>
+    <h1>This is a test</h1>
+    {% include "footer.html"%}
 </body>
 </html>

@@ -36,7 +36,8 @@ async fn main() {
     // Build the router with app state from axum templates
     let app = Router::new()
         .route("/", get(wip_page))
-        .route("/:name", get(get_name))
+        .route("/api/:name", get(get_name))
+        .route("/:test", get(get_name))
         .with_state(AppState {
             engine: Engine::from(tera),
         });
