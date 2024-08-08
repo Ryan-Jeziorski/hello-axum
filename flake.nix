@@ -52,6 +52,7 @@
             # Other Tools
             lsd
             tree
+            helix
 
           ];
         };
