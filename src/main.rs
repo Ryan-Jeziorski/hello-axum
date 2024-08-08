@@ -1,16 +1,10 @@
 use axum::{
     async_trait,
-    extract::{
-        rejection::MatchedPathRejection, 
-        FromRef, 
-        FromRequestParts, 
-        MatchedPath, 
-        Path
-    },
+    extract::{rejection::MatchedPathRejection, FromRef, FromRequestParts, MatchedPath, Path},
     http::request::Parts,
-    response::{IntoResponse, Html},
+    response::{Html, IntoResponse},
     routing::get,
-    serve, Router, RequestPartsExt,
+    serve, RequestPartsExt, Router,
 };
 
 use axum_template::{engine::Engine, Key, RenderHtml, TemplateEngine};
@@ -18,10 +12,8 @@ use serde::{ser::Impossible, Serialize};
 use tera::Tera;
 use tokio::net::TcpListener;
 
-
 // Type alias for our engine using Tera templates
 type AppEngine = Engine<Tera>;
-
 
 #[derive(Clone, FromRef)]
 struct AppState {
@@ -49,8 +41,6 @@ async fn main() {
     println!("listening on {}", listener.local_addr().unwrap());
     axum::serve(listener, app).await.unwrap();
 }
-
-
 
 // Because Tera::new loads an entire folder, we need to remove the `/` prefix
 // and add a `.html` suffix. We can implement our own custom key extractor that
@@ -99,17 +89,24 @@ async fn get_name(
     RenderHtml(template, engine, person)
 }
 
+#[derive(Debug, Serialize)]
+pub struct Empty {
+    empty: String,
+}
+
 async fn get_route(
     engine: AppEngine,
     // Key(key): Key,
 ) -> impl IntoResponse {
     let key = "index.html";
-    let person = Person{name: "None".to_string()};
-    RenderHtml(key, engine, person)
+    let empty = "".to_string();
+    let empty = Empty { empty };
+    RenderHtml(key, engine, empty)
 }
 
 async fn wip_page() -> Html<&'static str> {
-    Html(r#"
+    Html(
+        r#"
 <!DOCTYPE html> 
 <html lang="en"> 
     <head> 
@@ -126,5 +123,6 @@ async fn wip_page() -> Html<&'static str> {
         </h1> 
     </body> 
 </html> 
-    "#)
+    "#,
+    )
 }
