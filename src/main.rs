@@ -13,8 +13,8 @@ use axum::{
     serve, Router, RequestPartsExt,
 };
 
-use axum_template::{engine::Engine, Key, RenderHtml};
-use serde::Serialize;
+use axum_template::{engine::Engine, Key, RenderHtml, TemplateEngine};
+use serde::{ser::Impossible, Serialize};
 use tera::Tera;
 use tokio::net::TcpListener;
 
@@ -31,11 +31,12 @@ struct AppState {
 #[tokio::main]
 async fn main() {
     // Create a new Tera instance and add a template from a string
-    let tera = Tera::new("site/*").unwrap();
+    let tera = Tera::new("site/**/*.html").unwrap();
 
     // Build the router with app state from axum templates
     let app = Router::new()
-        .route("/", get(wip_page))
+        .route("/", get(get_route))
+        .route("/index", get(get_route))
         .route("/:name", get(get_name))
         .with_state(AppState {
             engine: Engine::from(tera),
@@ -96,6 +97,15 @@ async fn get_name(
     let person = Person { name };
 
     RenderHtml(template, engine, person)
+}
+
+async fn get_route(
+    engine: AppEngine,
+    // Key(key): Key,
+) -> impl IntoResponse {
+    let key = "index.html";
+    let person = Person{name: "None".to_string()};
+    RenderHtml(key, engine, person)
 }
 
 async fn wip_page() -> Html<&'static str> {
