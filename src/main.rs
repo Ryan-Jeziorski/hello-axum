@@ -4,13 +4,12 @@ use axum::{
     http::request::Parts,
     response::{Html, IntoResponse},
     routing::get,
-    serve, RequestPartsExt, Router,
+    RequestPartsExt, Router,
 };
 
-use axum_template::{engine::Engine, Key, RenderHtml, TemplateEngine};
-use serde::{ser::Impossible, Serialize};
+use axum_template::{engine::Engine, RenderHtml};
+use serde::Serialize;
 use tera::Tera;
-use tokio::net::TcpListener;
 
 // Type alias for our engine using Tera templates
 type AppEngine = Engine<Tera>;
