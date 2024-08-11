@@ -16,11 +16,31 @@
     </script>
 
     <link rel="stylesheet" href="style.css" />
+    <style>
+      body > header {
+        border-bottom: 1px solid #7ad91b;
+      }
+    </style>
     <title>Homepage</title>
 </head>
 <body>
 {% include "templates/header.html" %}
-<h1>Homepage</h1>
+  <h1>Homepage</h1>
+  <p>
+    Welcome to my simple website! I'm building this with a mix of:
+  </p>
+  <dl>
+    <dt>Rust</dt>
+    <dd>Programming language</dd>
+    <dt>Axum</dt>
+    <dd>A web server framework for building websites in Rust</dd>
+    <dt>Axum Templates</dt>
+    <dd>A templating engine extending Axum, using tera templates</dd>
+    <dt>Nix</dt>
+    <dd>A build tool suite for reproducible environments, and 
+      hopefully deployments.
+    </dd>
+  </dl>
 {% include "templates/footer.html" %}
 </body>
 </html>
