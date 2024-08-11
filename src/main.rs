@@ -28,7 +28,7 @@ async fn main() {
     let app = Router::new()
         .route("/", get(get_route))
         .route("/index", get(get_route))
-        .route("/:name", get(get_name))
+        .route("/api/:name", get(get_name))
         .with_state(AppState {
             engine: Engine::from(tera),
         });
