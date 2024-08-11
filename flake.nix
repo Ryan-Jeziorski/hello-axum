@@ -53,7 +53,6 @@
             lsd
             tree
             helix
-            neovim
 
           ];
         };
