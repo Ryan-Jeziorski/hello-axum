@@ -11,9 +11,13 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = "github:Ryan-Jeziorski/nix-vim-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, rust-overlay }:
+  outputs = { self, nixpkgs, rust-overlay, nixvim }:
     let
       overlays = [
         rust-overlay.overlays.default
@@ -30,11 +34,12 @@
               rust.stable.latest.default.override {
                 extensions = [ "rust-src" "rustfmt" ];
               };
+          nixvim = nixvim;
         })
       ];
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
-        pkgs = import nixpkgs { inherit overlays system; };
+        pkgs = import nixpkgs { inherit overlays system nixvim; };
       });
     in
     {
@@ -53,6 +58,8 @@
             lsd
             tree
             helix
+            nixvim.legacyPackages.x86_64-linux.nixvim
+            #nixvim.legacyPackages.x86_64-linux.nixvim
 
           ];
         };
