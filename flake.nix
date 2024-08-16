@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-      url = "github:Ryan-Jeziorski/nix-vim-config";
+      url = "github:Ryan-Jeziorski/nix-vim-config/lsp-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
