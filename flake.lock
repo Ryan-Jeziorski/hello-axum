@@ -245,11 +245,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1723868704,
-        "narHash": "sha256-lWjyDU9t6XdbE2zmFEWOHQ4KfM591So7NC3I08MBZ2I=",
+        "lastModified": 1723988588,
+        "narHash": "sha256-Jju7YW8kkHdry80EvLH31xcM8SLTttv/gGdDACF9Tb4=",
         "owner": "Ryan-Jeziorski",
         "repo": "nix-vim-config",
-        "rev": "3ce2489aa16b8aaacf9ee9640cded1c646b9a04b",
+        "rev": "230e6f72c57fd08540b4d3f103a9df346b148340",
         "type": "github"
       },
       "original": {
@@ -322,11 +322,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1723861146,
-        "narHash": "sha256-tfPBU+fK6YYMZvNsOYHv6JzBa8XKuhtfu8Cb9lnri1w=",
+        "lastModified": 1723947704,
+        "narHash": "sha256-TcVf66N2NgGhxORFytzgqWcg0XJ+kk8uNLNsTRI5sYM=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "07105b5f550665ff417487febcd6bf5dd071b931",
+        "rev": "456e78a55feade2c3bc6d7bc0bf5e710c9d86120",
         "type": "github"
       },
       "original": {
