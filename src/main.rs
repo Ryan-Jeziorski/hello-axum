@@ -102,26 +102,3 @@ async fn get_route(
     let empty = Empty { empty };
     RenderHtml(key, engine, empty)
 }
-
-async fn wip_page() -> Html<&'static str> {
-    Html(
-        r#"
-<!DOCTYPE html> 
-<html lang="en"> 
-    <head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <!-- Minified version of simple.css -->
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-    </head> 
-    <body> 
-        <h1> 
-            Please come back soon, this page is a work in progress! 
-        </h1> 
-    </body> 
-</html> 
-    "#,
-    )
-}
