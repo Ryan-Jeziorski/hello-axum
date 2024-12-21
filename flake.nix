@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-      url = "github:Ryan-Jeziorski/nix-vim-config/dev";
+      url = "github:Ryan-Jeziorski/nix-vim-config/more_plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
