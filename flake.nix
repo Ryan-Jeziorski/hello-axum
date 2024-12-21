@@ -58,7 +58,7 @@
             lsd
             tree
             helix
-            nixvim.legacyPackages.x86_64-linux.nixvim
+            nixvim.legacyPackages.${system}.nixvim
             #nixvim.legacyPackages.x86_64-linux.nixvim
 
           ];
